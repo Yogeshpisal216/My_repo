@@ -1,0 +1,57 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  VpcCreate:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 172.25.0.0/16
+      Tags:
+        - Key: Use
+          Value: Cft
+
+  SubnetCreate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        !Ref VpcCreate
+      CidrBlock: 172.25.0.0/17
+      AvailabilityZone: us-west-2a
+      Tags:
+        - Key: Use
+          Value: Cft
+
+  SecurityGroupCreate:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      VpcId:
+        !Ref VpcCreate
+      Tags:
+        - Key: Use
+          Value: Cft
+
+  Ec2Creation:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-008fe2fc65df48dac
+      InstanceType: t2.micro
+      KeyName: oregon
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - Ref: "SecurityGroupCreate"
+          SubnetId: 
+              Ref: "SubnetCreate"
+      Tags:
+        - Key: Use
+          Value: Cft
