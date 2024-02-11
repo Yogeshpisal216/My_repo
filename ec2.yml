@@ -7,7 +7,7 @@ Resources:
       CidrBlock: 172.25.0.0/16
       Tags:
         - Key: Use
-          Value: Cfttemplate
+          Value: Cft
 
   SubnetCreate:
     Type: AWS::EC2::Subnet
