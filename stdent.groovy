@@ -1,11 +1,11 @@
 pipeline {
-    agent {
-        label 'My_node'
-    }
+    agent { 
+        label 'My_node' 
+        }
     stages {
         stage('git commit') {
             steps {
-                echo 'welcome to pipeline it run automaticlly'
+                echo 'welcome to my pipeline'
                 git 'https://github.com/Yogeshpisal216/yogi.git'
                   }
              }
@@ -24,8 +24,7 @@ pipeline {
             steps {
                 sh '''
                  echo 'added artifacts in bucket'
-                 sudo update 
-                 sudo apt install 
+                 sudo apt install awscli -y
                  aws s3 cp target/*.war s3://s3-bucket-for-ec2-nginx
                 '''
                  }
@@ -45,11 +44,11 @@ pipeline {
             steps{
                 sh '''
                 echo "data add into webapps"
-                cp s3://s3-bucket-for-ec2-nginx./target/*.war ./apache-tomcat-8.5.98/webapps/student.war
-                sh apache-tomcat-8.5.98/bin/catalina.sh start
+                aws s3 cp s3://s3-bucket-for-ec2-nginx/studentapp-2.2-SNAPSHOT.war ./apache-tomcat-8.5.98/webapps/student.war
+                sh /home/ubuntu/workspace/My_project/apache-tomcat-8.5.98/bin/catalina.sh start
                 '''
                 }
         }
         
     }
-}
+}                
