@@ -9,16 +9,16 @@ pipeline {
         }
          stage('TEST') {
             steps {
-                bash '''
+             
                 echo 'Hello World' > file1.txt
-                '''
+             
             }
         }
          stage('DEPLOY') {
             steps {
-                bash'''
+              
                 echo 'Hello World' > file
-                '''
+             
             }
         }
     }
