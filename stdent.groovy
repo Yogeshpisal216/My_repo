@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label node_1
+        label My_node
     }
     stages {
         stage('git commit') {
