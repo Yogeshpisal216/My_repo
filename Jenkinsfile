@@ -11,7 +11,7 @@ pipeline {
             steps {
                 
              sh'''
-                echo 'Hello World' > file1.txt
+                echo 'Hello World' > yogi
              '''
             }
         }
