@@ -7,17 +7,6 @@ pipeline {
                 git 'https://github.com/Yogeshpisal216/student.git'
                   }
              }
-        stage('maven package'){
-            steps{
-                sh '''
-                echo "Install maven package"
-                sudo apt update
-                sudo apt install maven -y
-                sudo mvn clean
-                sudo mvn package
-                '''
-            }
-        }
         stage('artifacts') {
             steps {
                 sh '''
