@@ -5,6 +5,7 @@ pipeline {
         stage('BUILD') {
             steps {
                 echo 'pipeline is created'
+                git 'https://github.com/Yogeshpisal216/yogi.git'
             }
         }
          stage('TEST') {
