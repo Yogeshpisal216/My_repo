@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('git commit') {
             steps {
-                echo 'welcome to pipeline'
+                echo 'welcome to pipeline it run automaticlly'
                 git 'https://github.com/Yogeshpisal216/yogi.git'
                   }
              }
