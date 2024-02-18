@@ -1,26 +1,49 @@
 pipeline {
-    agent any
-
+    agent { 
+        label 'closer_1' 
+        }
     stages {
-        stage('BUILD') {
+        stage('git commit') {
             steps {
-                echo 'pipeline is created'
-                git 'https://github.com/Yogeshpisal216/yogi.git'
+                echo 'clone repositery consist of build packages'
+                git 'https://github.com/swapnibrad/studentapp-ui.git'
+                  }
+             }
+        stage('build') {
+            steps {
+                sh '''
+                echo "installing maven package for build"
+                sudo apt update
+                sudo apt install maven -y
+                echo "creating package from maven"
+                sudo mvn clean /home/ubuntu/workspace/mvn_project
+                sudo mvn package /home/ubuntu/workspace/mvn_project
+                '''
             }
         }
-         stage('TEST') {
+        // stage('artifacts') {
+        //     steps {
+        //     echo 'added artifacts in bucket'
+        //     aws s3 cp target/*.war s3://
+
+        //     }
+        // }
+        stage('application') {
             steps {
-                
-             sh'''
-                echo 'Hello World' > yogi.txt
-             '''
+            sh '''
+              echo "install tomcat-server"
+              wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.zip
+              sudo apt-get install unzip -y
+              unzip apache-tomcat-8.5.98.zip
+              cp ./target/studentapp-2.2-SNAPSHOT.war ./apache-tomcat-8.5.98/webapps/studentapp.war
+              sh ./apache-tomcat-8.5.98/bin/catalina.sh start
+            '''
             }
         }
-         stage('DEPLOY') {
+        stage('pull repo') {
             steps {
-              sh '''
-                echo 'Hello World' > file
-             '''
+            echo 'pull github repositery'
+
             }
         }
     }
