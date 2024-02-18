@@ -6,6 +6,7 @@ pipeline {
         stage('git commit') {
             steps {
                 echo 'welcome to pipeline'
+                git 'https://github.com/Yogeshpisal216/yogi.git'
                   }
              }
         stage('maven package'){
