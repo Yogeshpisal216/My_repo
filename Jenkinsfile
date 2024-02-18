@@ -1,13 +1,25 @@
 pipeline {
     agent any
+
     stages {
-        stage('git commit') {
+        stage('BUILD') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+         stage('TEST') {
             steps {
                 bash '''
-                echo 'welcome'
-                echo 'wlcome to pipeline cloud' >> file.txt
+                echo 'Hello World' > file1.txt
                 '''
-                  }
-             }
+            }
+        }
+         stage('DEPLOY') {
+            steps {
+                bash'''
+                echo 'Hello World' > file
+                '''
+            }
+        }
     }
 }
