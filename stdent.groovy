@@ -45,7 +45,7 @@ pipeline {
                 sh '''
                 echo "data add into webapps"
                 aws s3 cp s3://s3-bucket-for-ec2-nginx/studentapp-2.2-SNAPSHOT.war ./apache-tomcat-8.5.98/webapps/student.war
-                sh /home/ubuntu/workspace/My_project/apache-tomcat-8.5.98/bin/catalina.sh start
+                sh /home/ubuntu/workspace/Yogi/apache-tomcat-8.5.98/bin/catalina.sh start
                 '''
                 }
         }
