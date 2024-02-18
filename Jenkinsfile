@@ -35,7 +35,7 @@ pipeline {
               wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.zip
               sudo apt-get install unzip -y
               unzip apache-tomcat-8.5.98.zip
-              cp ./target/studentapp-2.2-SNAPSHOT.war ./apache-tomcat-8.5.98/webapps/studentapp.war
+             # cp ./target/studentapp-2.2-SNAPSHOT.war ./apache-tomcat-8.5.98/webapps/studentapp.war
               sh ./apache-tomcat-8.5.98/bin/catalina.sh start
             '''
             }
